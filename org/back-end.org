@@ -1,0 +1,96 @@
+#+TITLE: Back End Completo
+#+DESCRIPTION: Back End da Aplicação
+#+SETUPFILE: theme/theme.setup
+#+OPTIONS: num:nil ^:{}
+#+INCLUDE: "header.org"
+#+EXPORT_FILE_NAME: ../back-end.html
+
+* Visão Geral  
+
+O back-end da aplicação é baseado em uma API desenvolvida com *FastAPI*, responsável por gerenciar as principais funcionalidades da plataforma, incluindo:  
+
+- Cadastro de empresas e funcionários  
+- Chat corporativo  
+- Calendário da empresa e dos funcionários  
+- Gerenciamento de funcionários e permissões  
+- Administração da empresa  
+- Logs e auditoria  
+
+* Arquitetura e Banco de Dados  
+
+A aplicação utiliza três bancos de dados para otimizar desempenho e escalabilidade:  
+
+1. **PostgreSQL** - Banco relacional principal, armazenando todas as informações críticas da aplicação.  
+2. **Redis** - Utilizado para *cache*, evitando sobrecarga do sistema e melhorando a performance.  
+3. **MongoDB** - Armazena logs e auditorias, com deleção automática de registros após 1 ano.  
+
+* Fluxo de Desenvolvimento  
+
+O repositório segue um fluxo simplificado do *Git Flow*, com as seguintes branches principais:  
+
+- `main` → Produção  
+- `qa` → Testes internos  
+- `dev` → Desenvolvimento ativo  
+  - Features devem ser desenvolvidas em branches separadas a partir de `dev`.  
+
+O deploy é realizado automaticamente para a plataforma *Render*, utilizando a branch `qa` para testes internos.  
+
+* Boas Práticas  
+
+- **Testes**:  
+  - Toda nova funcionalidade deve incluir testes unitários.  
+  - PRs sem testes serão recusadas.  
+
+- **Commits**:  
+  - Seguir a convenção *Conventional Commits* para manter um histórico organizado e semântico.  
+
+- **Code Review**:  
+  - O código deve ser revisado antes do *merge* em `qa` ou `main`.  
+  - Feedbacks devem ser resolvidos antes da aprovação.  
+
+* Tecnologias Utilizadas  
+
+A stack do back-end foi escolhida para garantir **performance, escalabilidade e facilidade de manutenção**.  
+
+- **Linguagem**:  
+  - Python → Principal linguagem de desenvolvimento.  
+
+- **Framework**:  
+  - FastAPI → Framework leve e eficiente para construção de APIs assíncronas.  
+
+- **Testes**:  
+  - Pytest → Framework para criação e execução de testes automatizados.  
+
+- **Banco de dados**:  
+  - PostgreSQL → Banco relacional principal.  
+  - Redis → Utilizado para *cache* e otimização de performance.  
+  - MongoDB → Armazena logs e auditorias, com deleção automática após 1 ano.  
+
+- **Filas e Mensageria**:  
+  - RabbitMQ → Utilizado para comunicação assíncrona e processamento de tarefas em background.  
+
+- **Infraestrutura**:  
+  - Docker → Contêinerização para padronização do ambiente.  
+  - Kubernetes → Orquestração dos contêineres para escalabilidade e gerenciamento eficiente.  
+
+- **Monitoramento e Observabilidade**:  
+  - Prometheus → Coleta e armazenamento de métricas do sistema.  
+  - Grafana → Visualização de métricas e dashboards para monitoramento.  
+
+- **CI/CD (Integração Contínua e Deploy Contínuo)**:  
+  - GitHub Actions → Automatização de testes e deploys.  
+  - Render → Plataforma onde a aplicação será implantada para testes internos.  
+
+* Fluxo da API  
+
+O *Back-End* segue um fluxo estruturado para processar requisições e retornar respostas de forma eficiente.  
+
+[[./assets/images/fluxo_api.png]]
+
+1. O *Front-End* realiza uma requisição HTTP para a API via *Axios*.  
+2. A API recebe a requisição e valida os dados com *Pydantic*.  
+3. O FastAPI encaminha a requisição para a camada de serviço, onde a lógica de negócios é aplicada.  
+4. Se necessário, os dados são consultados no *PostgreSQL* ou *Redis* (cache).  
+5. Caso seja uma operação assíncrona (ex: envio de e-mail), a requisição é enviada para o *RabbitMQ*.  
+6. A resposta é retornada ao *Front-End*, com códigos HTTP apropriados.  
+7. Logs da requisição são armazenados no *MongoDB* para auditoria.  

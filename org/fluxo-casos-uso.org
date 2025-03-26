@@ -1,0 +1,508 @@
+#+TITLE: Fluxos e Casos de Uso
+#+SETUPFILE: theme/theme.setup
+#+OPTIONS: num:nil ^:{}
+#+INCLUDE: "header.org"
+#+EXPORT_FILE_NAME: ../fluxos-casos-uso.html
+
+* Fluxo de Login
+
+  **Pré-condições**
+  - O usuário acessa a página inicial do sistema.
+
+** **Fluxo Principal**
+
+  1. O sistema exibe a página de login com os seguintes elementos:
+     - **Logotipo HuzunSlug** posicionado no canto superior esquerdo.
+     - **Formulário de Login**:
+       - Campo de **Nome de Usuário** com placeholder "Digite seu nome de usuário".
+       - Campo de **Senha** com placeholder "Digite sua senha" e ícone para alternar a visibilidade da senha.
+       - **Checkbox "Lembre de mim"**: opção para manter o usuário logado.
+       - **Link "Esqueceu a senha?"** para recuperação de senha.
+       - **Botão "Login"**: Destacado em preto, para envio das credenciais.
+
+  2. O usuário preenche os campos com suas credenciais.
+  
+  3. O usuário clica no botão **"Login"**.
+
+  4. O sistema realiza uma requisição HTTP para o endpoint de autenticação da API com as credenciais fornecidas.
+  
+  5. A API valida as credenciais no banco de dados:
+     - Se as credenciais forem válidas, a API retorna um **token de autenticação (JWT)**.
+     - Se as credenciais forem inválidas, o sistema exibe uma mensagem de erro: "Credenciais inválidas".
+
+  6. O sistema armazena o token de autenticação no **localStorage** ou **sessionStorage** do navegador.
+
+  7. O sistema redireciona o usuário para o painel correspondente ao seu perfil:
+     - **Administrador**: Acesso ao painel de configurações administrativas.
+     - **Funcionário**: Acesso ao painel de controle com recursos limitados.
+
+** **Fluxos Alternativos**
+
+  - **Esquecimento de senha**:
+    1. O usuário clica no link "Esqueceu a senha?".
+    2. O sistema solicita o e-mail do usuário.
+    3. O usuário recebe um e-mail com um link para redefinir a senha.
+
+  - **Usuário já logado**:
+    1. Se o usuário já estiver logado, ele é redirecionado diretamente para o painel principal.
+
+  **Fluxo de Exceção**
+
+  - Se a API retornar um erro de rede ou falha na validação das credenciais, o sistema exibe uma mensagem de erro: "Erro na autenticação. Tente novamente."
+
+  **Pós-condições**
+  - O usuário está autenticado e possui um token de autenticação válido armazenado no navegador.
+  - O usuário é redirecionado para o painel correspondente ao seu perfil (Administrador ou Funcionário).
+
+** **Design e Usabilidade**
+
+  - **Estética e Layout**:
+    - A interface possui um design clean e moderno com predominância de preto e branco.
+    - Layout responsivo que se adapta a diferentes dispositivos (desktop, tablet, smartphone).
+    - Ilustração interativa à direita da tela, tornando a interface mais convidativa e amigável.
+
+  - **Acessibilidade e Usabilidade**:
+    - O formulário de login é de fácil acesso e possui campos claramente identificados.
+    - O ícone de alternância da senha oferece uma maneira intuitiva de visualizar a senha digitada.
+    - O link para recuperação de senha é claramente visível e acessível.
+
+---
+
+* Fluxo de Cadastro de Funcionário
+
+  **Pré-condições**
+  - O administrador está autenticado e tem permissão para cadastrar funcionários.
+  - O administrador acessa a tela de cadastro de funcionários a partir do dashboard (via sidebar ou menu).
+
+**  **Fluxo Principal**
+
+  1. O sistema exibe a tela de cadastro com os seguintes campos obrigatórios:
+     - **Nome**: Campo de texto para inserir o nome completo do funcionário.
+     - **E-mail**: Campo de texto para o e-mail do funcionário.
+     - **Cargo**: Campo de seleção para escolher o cargo do funcionário.
+     - **Departamento**: Campo de seleção para escolher o departamento do funcionário.
+     - **Permissões**: Checkbox ou lista de seleção múltipla para atribuição de permissões (ex: calendário, relatórios, chats, pagamentos, etc.).
+
+  2. O administrador preenche as informações do novo funcionário.
+
+  3. O administrador clica no botão **"Cadastrar"**.
+
+  4. O sistema realiza a validação das informações inseridas:
+     - **E-mail**: Verifica se o e-mail é válido e não está vazio.
+     - **Campos obrigatórios**: Verifica se todos os campos obrigatórios foram preenchidos.
+     - Se algum dado obrigatório estiver ausente ou o formato for inválido, o sistema exibe uma mensagem de erro e destaca o campo incorreto.
+     - Se os dados estiverem corretos, o sistema envia uma requisição HTTP para a API para salvar as informações no banco de dados.
+
+  5. O sistema atribui permissões ao novo funcionário de acordo com o cargo e o perfil selecionado:
+     - O administrador pode selecionar permissões para áreas como calendário, relatórios, chats, pagamentos, entre outras.
+
+  6. O sistema registra o novo funcionário no banco de dados e envia um e-mail de boas-vindas ao funcionário com instruções de acesso inicial ao sistema.
+
+  7. O administrador é redirecionado para a **lista de funcionários** ou recebe uma mensagem de sucesso informando que o cadastro foi realizado com êxito.
+
+**  **Fluxos Alternativos**
+
+  - **E-mail já cadastrado**:
+    1. Se o e-mail do funcionário já estiver registrado no sistema, o sistema exibe uma mensagem de erro informando que o e-mail já existe.
+    2. O administrador pode optar por corrigir o e-mail ou cancelar o cadastro.
+
+  **Fluxo de Exceção**
+
+  - **Falha na requisição para a API**:
+    1. Se ocorrer uma falha na comunicação com a API ou no salvamento dos dados, o sistema exibe uma mensagem de erro: "Erro ao cadastrar funcionário. Tente novamente."
+
+  **Pós-condições**
+  - O novo funcionário foi registrado no sistema com as permissões atribuídas e recebeu um e-mail de boas-vindas.
+  - O administrador visualiza a lista de funcionários atualizada ou uma mensagem de sucesso confirmando o cadastro.
+
+** **Design e Usabilidade**
+
+  - **Estética e Layout**:
+    - O formulário possui uma estrutura limpa e intuitiva, com campos bem identificados.
+    - O layout é responsivo, adaptando-se a diferentes tamanhos de tela (desktop, tablet, smartphone).
+
+  - **Acessibilidade e Usabilidade**:
+    - Validação de campos clara, com mensagens de erro visíveis ao lado dos campos com problemas.
+    - Campos de seleção de permissões bem organizados para facilitar a atribuição de permissões.
+
+---
+
+* Fluxo de Acesso ao Calendário
+
+  **Pré-condições**
+  - O funcionário está autenticado e tem permissão para acessar o calendário.
+  - O administrador está autenticado e possui permissões para gerenciar calendários.
+
+**  **Fluxo Principal**
+
+  1. O funcionário acessa a tela inicial (dashboard) e encontra o ícone do **Calendário** na sidebar.
+  
+  2. O sistema exibe o calendário do funcionário, mostrando os compromissos e eventos do mês atual.
+
+  3. O funcionário pode adicionar novos compromissos, como reuniões ou tarefas, clicando em um dia específico no calendário.
+
+  4. Ao clicar em um dia, o sistema exibe um **modal** ou página onde o funcionário pode preencher os detalhes do evento, incluindo:
+     - Nome do evento.
+     - Hora de início e término.
+     - Descrição do evento.
+     - Local (opcional).
+     - Links para videoconferência (se aplicável).
+
+  5. O **administrador** pode acessar o calendário de qualquer funcionário ou grupo de funcionários:
+     - O administrador acessa o calendário a partir da tela "Gerenciamento de Funcionários" ou "Calendário de Equipes".
+     - O administrador tem acesso a todos os compromissos e eventos atribuídos aos funcionários ou grupos.
+
+  6. O **administrador** pode adicionar ou editar compromissos no calendário de qualquer funcionário, com as mesmas funcionalidades de um funcionário regular (adicionar, editar e excluir eventos).
+
+  7. O funcionário ou administrador pode **editar ou excluir compromissos** diretamente no calendário.
+
+**  **Fluxos Alternativos**
+
+  - **Horário já ocupado**:
+    1. Caso o funcionário ou administrador tente adicionar um evento em um horário já ocupado, o sistema exibe uma mensagem de erro: "O horário selecionado está ocupado. Escolha outro horário."
+
+  - **Permissão negada ao administrador**:
+    1. Se o administrador tentar editar o calendário de um funcionário sem permissões adequadas, o sistema exibe uma mensagem de erro: "Permissão negada para editar o calendário deste funcionário."
+
+  **Fluxo de Exceção**
+
+  - **Erro ao salvar evento**:
+    1. Caso ocorra uma falha na comunicação com a API ou no salvamento de dados, o sistema exibe uma mensagem de erro: "Erro ao salvar o evento. Tente novamente."
+
+  **Pós-condições**
+  - O evento é salvo no calendário do funcionário ou grupo de funcionários.
+  - O administrador tem acesso ao calendário atualizado e pode gerenciar compromissos conforme necessário.
+
+** Estrutura Geral
+
+  A tela do calendário está dividida em três seções principais:
+
+  1. *Painel esquerdo (barra lateral)*:
+     - Exibe um **mini calendário mensal** com os dias destacados.
+     - Lista os **eventos do dia** e próximos compromissos.
+     - Mostra detalhes como **temperatura** e previsões do tempo.
+     - Inclui **atalhos** para adicionar eventos rapidamente.
+  
+  2. *Área central (visualização do calendário)*:
+     - Exibe os eventos em um formato de **agenda semanal**.
+     - Permite alternar entre **visualizações diárias, semanais, mensais e anuais**.
+     - Mostra compromissos organizados por horário e **cor para diferenciar categorias**.
+  
+  3. *Barra superior*:
+     - Contém **botões de navegação** entre datas.
+     - Possui um **campo de busca** para encontrar eventos rapidamente.
+
+** Funcionalidades do Calendário
+
+  - **Criação e edição de eventos**: Adicionar novos compromissos rapidamente.
+  - **Integração com videoconferências**: Links diretos para reuniões online.
+  - **Categorização por cor**: Diferencia eventos por importância ou tipo.
+  - **Notificações e lembretes**: Alerta sobre reuniões futuras.
+  - **Eventos recorrentes**: Suporte para compromissos diários, semanais ou mensais.
+
+** **Design e Usabilidade**
+
+  - **Interface clara e intuitiva**, com contraste suficiente para fácil leitura.
+  - **Cores distintas** ajudam a diferenciar tipos de eventos.
+  - **Modo escuro** no painel lateral, proporcionando melhor visibilidade.
+  - **Organização lógica e fluida**, permitindo rápida navegação e gerenciamento dos compromissos.
+  - **Responsividade** para diferentes tamanhos de tela e dispositivos.
+
+---
+
+* Fluxo de Navegação no Dashboard
+
+  **Pré-condições**
+  - O funcionário está autenticado e tem acesso ao dashboard.
+
+**  **Fluxo Principal**
+
+  1. O funcionário acessa a tela inicial (dashboard) após fazer login.
+
+  2. O sistema exibe a tela inicial com as seguintes opções no menu lateral (sidebar):
+     - **Dashboard (ativo)**: Exibe um resumo geral das métricas e dados.
+     - **Calendário**: Acesso ao calendário pessoal e eventos.
+     - **E-mail**: Acesso à caixa de entrada de e-mails.
+     - **Área de Pagamentos**: Acesso à página de históricos de pagamentos.
+     - **Clientes**: Acesso à lista de clientes da empresa e seus detalhes.
+     - **Raids**: Acesso ao sistema de gestão de raids (caso exista).
+     - **Chat**: Acesso ao chat de equipe para comunicação interna.
+     - **Campanhas**: Acesso a campanhas de marketing ou vendas.
+     - **Tela de Serviços**: Acesso a serviços ou funcionalidades adicionais.
+     - **Flow**: Acesso ao editor de fluxos de automação.
+     - **Suporte e Configurações**: Acesso ao suporte e às configurações do sistema.
+
+  3. Além disso, o dashboard exibe as seguintes seções e widgets informativos:
+     - **📊 Seção de Resultados Finais**: Gráfico de barras mensais com métricas de desempenho.
+     - **📆 Mini Calendário**: Exibe um calendário pequeno com os eventos do mês atual.
+     - **📞 Chamados Abertos**: Exibe o número de chamados abertos e em fila para atendimento.
+     - **💰 Lucro Líquido**: Exibe o lucro do mês ou do período selecionado, com comparações de crescimento.
+     - **🔥 Mapa de Calor**: Representa a densidade de atividade ao longo da semana e do dia.
+     - **🖥 Lista de Funcionários Online**: Mostra quais funcionários estão online no sistema no momento.
+
+  4. O funcionário pode acessar qualquer uma dessas áreas clicando nas opções da sidebar.
+  
+  5. O sistema atualiza as seções e widgets conforme o funcionário interage com o dashboard, exibindo informações em tempo real ou conforme a configuração de atualizações.
+
+**  **Fluxos Alternativos**
+
+  - **Acesso Restrito**:
+    1. Caso o funcionário não tenha permissões para acessar determinada área (ex: área de pagamento), ele verá uma mensagem de erro: "Acesso Restrito". O sistema impedirá o acesso à página solicitada.
+  
+  - **Falha de Conexão**:
+    1. Caso o sistema detecte uma falha de conexão, será exibida a mensagem: "Conexão Perdida".
+    2. O sistema tentará reconectar automaticamente ou fornecerá a opção para o usuário tentar novamente.
+  
+  **Recursos Extras**
+
+  - **Botão de Calendário e Perfil**: Localizado no canto superior direito, permite ao usuário acessar configurações pessoais, como preferências de calendário e perfil.
+  
+  - **Campo de Busca**: O funcionário pode usar o campo de busca para encontrar dados rapidamente no sistema. Ele pode pesquisar por eventos, funcionários, ou informações relacionadas às métricas do dashboard.
+  
+  - **Filtros**: O sistema oferece filtros personalizados para exibição de dados. O funcionário pode ajustar os filtros de tempo, tipo de evento, e outros parâmetros para exibir informações específicas e facilitar a análise.
+
+  **Pós-condições**
+  - O funcionário tem acesso completo às áreas do dashboard conforme suas permissões.
+  - As seções e widgets do dashboard são atualizados em tempo real ou conforme configurado.
+
+** **Design e Usabilidade**
+
+  - **Interface clara e limpa**: O layout da sidebar e do dashboard é intuitivo, com contraste adequado para fácil leitura.
+  - **Organização lógica**: As opções do menu lateral são divididas por categorias e são facilmente acessíveis.
+  - **Responsividade**: O dashboard se adapta a diferentes dispositivos, garantindo usabilidade em desktops, tablets e smartphones.
+  - **Acessibilidade**: Elementos interativos como botões, campos de busca e widgets têm indicadores visuais claros para interatividade.
+
+---
+
+* Fluxo de Chat
+
+  **Pré-condições**
+  - O usuário está autenticado e tem acesso à área de chat.
+
+**  **Fluxo Principal**
+
+  1. O usuário acessa o **Chat** através da sidebar no dashboard.
+
+  2. O sistema exibe a interface de chat organizada da seguinte forma:
+     - **Sidebar Esquerda**: Menu de navegação com acesso aos seguintes módulos:
+       - **Dashboard**: Exibe o resumo geral das métricas e dados.
+       - **E-mail**: Acesso à caixa de entrada de e-mails.
+       - **Pagamentos**: Acesso aos históricos de pagamentos.
+       - **Clientes**: Acesso à lista de clientes e seus detalhes.
+       - **Raids**: Acesso ao sistema de gestão de raids.
+       - **Team Chat**: Acesso ao chat de equipe, onde as conversas internas acontecem.
+       - **Campanhas**: Acesso às campanhas de marketing ou vendas.
+       - **Tela de Serviços**: Acesso a serviços ou funcionalidades adicionais.
+       - **Calendário**: Acesso ao calendário de compromissos e eventos.
+       - **Flow**: Acesso ao editor de fluxos de automação.
+  
+     - **Área de Mensagens**: Exibe uma lista de conversas recentes, com as seguintes informações:
+       - **Nome** do contato ou grupo.
+       - **Última mensagem** enviada.
+       - **Horário** da última mensagem.
+       - **Ícones indicativos** de status, como reações, chamadas perdidas, mensagens não lidas, entre outros.
+  
+     - **Área de Chat**: Exibe a janela central onde as mensagens entre os participantes são trocadas. A janela de chat inclui:
+       - **Campo de digitação** para inserir mensagens.
+       - **Botões de envio**: Envio de texto e outros tipos de mensagem, como emojis, arquivos ou links.
+       - **Histórico de mensagens**: Exibe o histórico de mensagens trocadas entre os participantes.
+
+  3. O usuário pode selecionar uma conversa na **Área de Mensagens** para abrir a conversa desejada na **Área de Chat**.
+  
+  4. O usuário digita a mensagem e clica no botão **"Enviar"** para enviar a mensagem ao contato ou grupo selecionado.
+
+  5. O sistema atualiza a **Área de Mensagens** com a última mensagem enviada e a exibe na **Área de Chat**.
+
+**  **Fluxos Alternativos**
+
+  - **Mensagem Não Enviada**:
+    1. Se o sistema não conseguir enviar a mensagem devido a problemas de conexão ou outro erro, o sistema exibirá uma mensagem de erro: "Falha ao enviar mensagem". O usuário poderá tentar reenviar a mensagem ou verificar a conexão.
+
+  - **Novo Contato ou Grupo**:
+    1. Caso o usuário deseje iniciar uma nova conversa, ele pode clicar em um botão de **"Novo Chat"** para buscar e adicionar contatos ou criar um grupo de chat.
+    2. O sistema exibirá um formulário para selecionar os participantes da conversa e iniciar o chat.
+
+  **Recursos Extras**
+
+  - **Notificações**: O sistema envia notificações para o usuário quando uma nova mensagem chega, caso ele não esteja com a janela de chat aberta.
+  
+  - **Reações e Emojis**: O usuário pode reagir às mensagens enviadas utilizando emojis, e essas reações são visíveis para os participantes da conversa.
+
+  - **Envio de Arquivos**: O usuário pode anexar arquivos como imagens, documentos ou outros tipos de mídia durante a conversa.
+
+  - **Pesquisa de Mensagens**: O sistema oferece um campo de busca para encontrar mensagens específicas dentro de conversas ou chats.
+
+  **Pós-condições**
+  - A conversa é registrada e aparece no histórico de mensagens da **Área de Mensagens**.
+  - O sistema mantém o histórico de mensagens de forma persistente, permitindo que o usuário acesse as conversas anteriores a qualquer momento.
+
+** **Design e Usabilidade**
+
+  - **Interface intuitiva**: A navegação no chat é simples e permite fácil acesso às mensagens, grupos e contatos.
+  
+  - **Organização clara**: As conversas são exibidas de maneira cronológica e os ícones indicativos tornam a visualização rápida e eficiente.
+
+  - **Responsividade**: O layout do chat se adapta para diferentes dispositivos, como desktops, tablets e smartphones, garantindo uma experiência consistente.
+
+  - **Notificações visíveis**: Mensagens não lidas ou chamadas perdidas são claramente indicadas, proporcionando fácil monitoramento da atividade no chat.
+
+
+** Funcionalidades do Chat
+
+  1. **Campo de Digitação**:
+     - O usuário pode escrever mensagens no campo de entrada e enviá-las ao clicar no botão **"Enviar"**.
+
+  2. **Ícones Adicionais no Campo de Entrada**:
+     - O campo de digitação conta com ícones para facilitar a interação, como:
+       - **Anexos**: O usuário pode anexar arquivos ou imagens ao clicar no ícone de **clip**.
+       - **Emojis**: O usuário pode adicionar emojis às mensagens clicando no ícone de **rosto sorridente**.
+       - **Menções**: O usuário pode mencionar outras pessoas ou grupos no chat ao digitar **@** seguido do nome ou grupo desejado.
+  
+  3. **Indicação de Mensagens Lidas ou Recebidas**:
+     - Pequenos ícones são exibidos ao lado de cada mensagem para indicar se ela foi lida ou recebida:
+       - **Ícone de check verde**: Indica que a mensagem foi **recebida**.
+       - **Ícone de círculo azul**: Indica que a mensagem foi **lida**.
+
+
+** Funcionalidades Extras do Chat
+
+  1. **Perfil do Contato à Direita**:
+     - Ao selecionar um contato ou grupo, a área à direita exibe o **perfil** do contato com as seguintes informações:
+       - **Nome**: Nome do contato.
+       - **Telefone**: Número de telefone do contato.
+       - **E-mail**: E-mail do contato.
+       - **Cargo**: Cargo ou função do contato na empresa.
+       - **Status de Lead**: Exemplo de status como **Novo**, **Qualificado**, **Convertido**, etc.
+       - **Quem Criou o Contato**: Informação sobre o usuário responsável pela criação do contato.
+
+  2. **Notas Rápidas**:
+     - Uma seção na interface permite aos usuários adicionar **notas rápidas** sobre o contato ou a conversa em andamento.
+     - As notas são **compartilhadas entre os membros da equipe**, permitindo que todos visualizem as anotações sobre o cliente ou a conversa.
+  
+  3. **Filtros de Pesquisa e Organização**:
+     - A lista de conversas pode ser pesquisada por palavras-chave, nome do contato ou outras métricas, permitindo uma rápida localização de conversas.
+     - **Filtros avançados** permitem organizar as conversas de acordo com o **status** (ex: **Novo**, **Aguardando Resposta**) ou **data** (ex: **Últimos 7 dias**, **Este Mês**, etc.).
+
+  4. **Chamadas e Videoconferência**:
+     - Ícones de chamada de voz e videoconferência são exibidos na parte superior do chat, permitindo que os usuários façam:
+       - **Chamadas de voz**: Ao clicar no ícone de telefone.
+       - **Videoconferências**: Ao clicar no ícone de câmera de vídeo, os participantes podem se conectar em uma chamada de vídeo diretamente do chat.
+
+---
+
+* Fluxo de Acesso à Área de Pagamentos
+
+  **Estrutura Geral**:
+  - **Logotipo (HuzunSlug)**: Posicionado no canto superior esquerdo.
+  - **Formulário de login**: Caixa branca no lado esquerdo da tela, contendo os campos de entrada.
+  - **Ilustração visual**: No lado direito, há uma ilustração representando duas pessoas interagindo.
+
+  **Funcionalidades do Formulário**:
+  - **Campo de Nome de Usuário**:
+    - Permite inserir o nome de usuário para autenticação.
+    - Placeholder: "Digite seu nome de usuário".
+  - **Campo de Senha**:
+    - Entrada de senha protegida (com ícone para alternar a visibilidade).
+    - Placeholder: "Digite sua senha".
+  - **Opção "Lembre de mim"**:
+    - Checkbox para manter o usuário logado.
+  - **Link "Esqueceu a senha?"**:
+    - Permite recuperação de senha caso o usuário tenha esquecido.
+  - **Botão "Login"**:
+    - Botão preto destacado para envio das credenciais.
+
+**  **Design e Usabilidade**:
+  - **Estética clean e moderna**: Uso de preto e branco, fontes limpas e elementos bem organizados.
+  - **Layout responsivo**: Provavelmente se adapta bem a diferentes tamanhos de tela.
+  - **Ilustração interativa**: Torna a tela mais convidativa e amigável.
+
+**  **Fluxos Alternativos**:
+  - Caso as credenciais de login sejam inválidas, o sistema exibe uma mensagem de erro.
+  - Caso o usuário tenha esquecido a senha, ele pode clicar em **"Esqueceu a senha?"** para iniciar o processo de recuperação.
+
+---
+
+* Fluxo de Acesso à Página de Clientes
+
+  1. O usuário acessa a página de **Clientes** através do menu lateral no Dashboard.
+  2. O sistema exibe duas seções principais:
+     - **Lista de Clientes** à esquerda, com detalhes como nome, status, contato e tags.
+     - **Perfil Detalhado do Cliente** à direita, exibindo informações pessoais e médicas.
+  3. Na **barra superior**, são apresentadas ações rápidas, incluindo:
+     - **Busca** de clientes.
+     - **Exportação de dados** em CSV.
+     - **Adição de novos clientes**.
+
+**  **Fluxos Alternativos**:
+  - Caso o usuário não tenha permissões para acessar a página de clientes, o sistema exibirá uma mensagem de "Acesso Negado".
+
+---
+
+* Funcionalidades do Perfil de Clientes
+
+  **Lista de Clientes**:
+
+  1. Exibição de **clientes** com informações como:
+     - **Status**: (Ativo, Inativo, etc.)
+     - **Contato**: telefone e e-mail.
+     - **Tags**: Etiquetas para classificar clientes (ex: "Alto risco", "Urgente").
+  2. Opção para **selecionar todos os clientes** e realizar ações em massa (ex: exportar dados ou alterar status).
+  3. **Ícones de Edição**: Permite modificar informações de clientes diretamente na lista.
+  4. **Botões de Ação Rápida**:
+     - **Busca**: Pesquisa de clientes por nome ou e-mail.
+     - **Exportação de Dados**: Exporta a lista de clientes em formato CSV.
+
+  **Perfil Individual do Cliente**:
+
+  1. **Foto de Perfil e Nome**: Exibe a imagem do cliente e nome completo.
+  2. **Informações de Contato**: Inclui telefone, e-mail e opções de edição.
+  3. **Dados Médicos**: Organizados por categorias:
+     - **Encontros**: Registro de visitas e consultas anteriores.
+     - **Medicamentos**: Lista de medicamentos prescritos.
+     - **Alergias**: Informações sobre alergias e reações.
+     - **Histórico Médico**: Relatos médicos importantes ou históricos.
+     - **Notas**: Espaço para o profissional adicionar anotações.
+  4. **Próxima Consulta**: A próxima consulta é destacada com data e horário.
+  5. **Condições Ativas**: Exibição de condições médicas ativas do cliente, como hipertensão, diabetes, dermatite, etc., com etiquetas indicativas.
+
+---
+
+* Fluxo de E-mail
+
+  1. O usuário acessa a página de **E-mail** a partir do dashboard.
+  2. A interface de e-mail é dividida em:
+     - **Menu lateral esquerdo** com categorias: Caixa de Entrada, Comerciais, Enviados, Spam, Lixeira e Rascunhos.
+     - **Lista de E-mails** exibindo detalhes como remetente, assunto, status de leitura e horário.
+     - **Painel de Leitura de E-mails** à direita, com mensagens organizadas por conversas (threads).
+     - **Barra Superior de Ações**, incluindo respostas, encaminhamento, arquivamento e pesquisa.
+
+  **Funcionalidades**:
+  - Organização de e-mails por status de leitura e categorias.
+  - Opção de **marcar como lido/não lido**, **mover e-mails para pastas**.
+  - Respostas e encaminhamentos rápidos.
+  - **Barra de pesquisa** para localização rápida de e-mails.
+
+---
+
+* Fluxo da Página de Suporte
+
+  1. O usuário acessa a tela de suporte a partir do menu lateral no dashboard ou pelo acesso direto.
+  2. O sistema exibe a tela de suporte organizada em três áreas principais:
+     - **Painel Lateral Esquerdo**: Contém a marca "HuzunSlug" no topo, um campo de busca para localizar funcionalidades rapidamente e uma lista de seções (Dashboard, Email, Pagamentos, Clientes, Raids, Team Chat, Campanhas, Tela de serviços, Calendário, Flow).
+     - **Área Central**: Exibe a interface do chatbot inteligente, com a mensagem "Olá, sou o Vanguard. Como posso ajudar hoje?".
+     - **Campo de Entrada de Texto**: Localizado na parte inferior da tela, permitindo ao usuário digitar perguntas para o suporte e enviar arquivos através de um ícone de anexo.
+
+  3. O usuário pode interagir com o **chatbot inteligente**, chamado "Vanguard", para obter respostas rápidas.
+  4. O **campo de busca** permite que o usuário encontre rapidamente funcionalidades ou informações dentro da plataforma.
+  5. Caso o usuário precise enviar mais informações, ele pode **anexar arquivos** através do ícone de anexo no campo de entrada de texto.
+  6. O painel lateral oferece uma navegação rápida para outras áreas da plataforma, como o **Dashboard**, **E-mail**, **Pagamentos**, **Clientes**, **Raids**, **Team Chat**, **Campanhas**, **Tela de Serviços**, **Calendário** e **Flow**.
+
+** **Fluxos Alternativos**:
+  - Caso o chatbot não consiga fornecer uma resposta adequada, ele poderá direcionar o usuário para o suporte humano ou fornecer uma mensagem de "Solicitação registrada, entraremos em contato em breve".
+  - Se o usuário não encontrar o que procura no campo de busca, será possível realizar uma pesquisa mais detalhada ou obter ajuda do suporte via chatbot.
+
+**Recursos Extras**:
+  - **Botões de navegação** no painel lateral para acesso rápido às outras funcionalidades.
+  - **Possibilidade de anexar arquivos** para dar mais contexto ao pedido de suporte.
+
+---

@@ -1,0 +1,42 @@
+#+TITLE: Documentação Huzun
+#+DESCRIPTION: Documentação Completa Huzun
+#+SETUPFILE: theme/theme.setup
+#+OPTIONS: num:nil ^:{}
+#+INCLUDE: "header.org"
+#+EXPORT_FILE_NAME: ../index.html
+
+Informações podem ser alteradas ao longo do projeto.
+
+* Links Importantes
+
+  **Repositórios:**
+    - [[https://github.com/HuzunSlug/HuzunSlug-back-end][Back-End]]
+    - [[https://github.com/HuzunSlug/HuzunSlug-front-end][Front-End]]
+
+  **Design e Prototipação:**
+    - [[https://www.figma.com/design/KsxJscGs4ACzZWt89Wqc9E/Tela-de-inicio?node-id=635-2104&p=f&t=RY5u1hE6aQ7DWQjB-0][Figma]]
+
+  **Comunicação:**
+    - [[https://discord.gg/tSKp25ZG][Discord]]
+
+
+* Tecnologias Utilizadas
+
+  **Linguagens**:
+  - Python
+  - JavaScript
+
+  **Frameworks**:
+  - FastAPI (Back-End)
+  - React (Front-End)
+
+  **Banco de Dados**:
+  - PostgreSQL
+  - Redis
+  - MongoDB
+
+  **Infraestrutura**:
+  - Docker
+  - Kubernetes
+  - GitHub Actions (CI/CD)
+

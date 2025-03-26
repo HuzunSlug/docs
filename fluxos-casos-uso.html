@@ -1,0 +1,1009 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-03-25 Tue 22:17 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fluxos e Casos de Uso</title>
+<meta name="description" content="Header" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="src/readtheorg_theme/css/search.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/search.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">disableSearch();</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Fluxos e Casos de Uso</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3cb87a7">Fluxo de Login</a>
+<ul>
+<li><a href="#org93ef8cb"><b><b>Fluxo Principal</b></b></a></li>
+<li><a href="#org8fad0c6"><b><b>Fluxos Alternativos</b></b></a></li>
+<li><a href="#orga416c46"><b><b>Design e Usabilidade</b></b></a></li>
+</ul>
+</li>
+<li><a href="#org6f461b4">Fluxo de Cadastro de Funcionário</a>
+<ul>
+<li><a href="#orga1f2b87"><b><b>Fluxo Principal</b></b></a></li>
+<li><a href="#org871c2ca"><b><b>Fluxos Alternativos</b></b></a></li>
+<li><a href="#org4f9df68"><b><b>Design e Usabilidade</b></b></a></li>
+</ul>
+</li>
+<li><a href="#org04a2bd5">Fluxo de Acesso ao Calendário</a>
+<ul>
+<li><a href="#orgc1fe671"><b><b>Fluxo Principal</b></b></a></li>
+<li><a href="#org7867cc2"><b><b>Fluxos Alternativos</b></b></a></li>
+<li><a href="#org57066de">Estrutura Geral</a></li>
+<li><a href="#orgf4aa6de">Funcionalidades do Calendário</a></li>
+<li><a href="#org9170671"><b><b>Design e Usabilidade</b></b></a></li>
+</ul>
+</li>
+<li><a href="#org4c7ba8d">Fluxo de Navegação no Dashboard</a>
+<ul>
+<li><a href="#org4732320"><b><b>Fluxo Principal</b></b></a></li>
+<li><a href="#orgb61a8e3"><b><b>Fluxos Alternativos</b></b></a></li>
+<li><a href="#org7c265b2"><b><b>Design e Usabilidade</b></b></a></li>
+</ul>
+</li>
+<li><a href="#org4d5c708">Fluxo de Chat</a>
+<ul>
+<li><a href="#org364dbff"><b><b>Fluxo Principal</b></b></a></li>
+<li><a href="#org124112e"><b><b>Fluxos Alternativos</b></b></a></li>
+<li><a href="#orga7b8a01"><b><b>Design e Usabilidade</b></b></a></li>
+<li><a href="#orgf4fe2b1">Funcionalidades do Chat</a></li>
+<li><a href="#orgdfd7892">Funcionalidades Extras do Chat</a></li>
+</ul>
+</li>
+<li><a href="#orgcb1365d">Fluxo de Acesso à Área de Pagamentos</a>
+<ul>
+<li><a href="#org3c29d01"><b><b>Design e Usabilidade</b></b>:</a></li>
+<li><a href="#org792e681"><b><b>Fluxos Alternativos</b></b>:</a></li>
+</ul>
+</li>
+<li><a href="#org6eef5f3">Fluxo de Acesso à Página de Clientes</a>
+<ul>
+<li><a href="#org6fb3a2b"><b><b>Fluxos Alternativos</b></b>:</a></li>
+</ul>
+</li>
+<li><a href="#org8cf864a">Funcionalidades do Perfil de Clientes</a></li>
+<li><a href="#org9995113">Fluxo de E-mail</a></li>
+<li><a href="#org91fdcaf">Fluxo da Página de Suporte</a>
+<ul>
+<li><a href="#org944957e"><b><b>Fluxos Alternativos</b></b>:</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><a href="index.html">Home</a></td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><b><b>Stack</b></b></td>
+<td class="org-left"><b><b>Fluxos e Casos de Uso</b></b></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="back-end.html">Back-End</a></td>
+<td class="org-left"><a href="fluxos-casos-uso.html">Fluxos e Casos de Uso</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="front-end.html">Front-End</a></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<div id="outline-container-org3cb87a7" class="outline-2">
+<h2 id="org3cb87a7">Fluxo de Login</h2>
+<div class="outline-text-2" id="text-org3cb87a7">
+<p>
+<b><b>Pré-condições</b></b>
+</p>
+<ul class="org-ul">
+<li>O usuário acessa a página inicial do sistema.</li>
+</ul>
+</div>
+
+<div id="outline-container-org93ef8cb" class="outline-3">
+<h3 id="org93ef8cb"><b><b>Fluxo Principal</b></b></h3>
+<div class="outline-text-3" id="text-org93ef8cb">
+<ol class="org-ol">
+<li>O sistema exibe a página de login com os seguintes elementos:
+<ul class="org-ul">
+<li><b><b>Logotipo HuzunSlug</b></b> posicionado no canto superior esquerdo.</li>
+<li><b><b>Formulário de Login</b></b>:
+<ul class="org-ul">
+<li>Campo de <b><b>Nome de Usuário</b></b> com placeholder "Digite seu nome de usuário".</li>
+<li>Campo de <b><b>Senha</b></b> com placeholder "Digite sua senha" e ícone para alternar a visibilidade da senha.</li>
+<li><b><b>Checkbox "Lembre de mim"</b></b>: opção para manter o usuário logado.</li>
+<li><b><b>Link "Esqueceu a senha?"</b></b> para recuperação de senha.</li>
+<li><b><b>Botão "Login"</b></b>: Destacado em preto, para envio das credenciais.</li>
+</ul></li>
+</ul></li>
+
+<li>O usuário preenche os campos com suas credenciais.</li>
+
+<li>O usuário clica no botão <b><b>"Login"</b></b>.</li>
+
+<li>O sistema realiza uma requisição HTTP para o endpoint de autenticação da API com as credenciais fornecidas.</li>
+
+<li>A API valida as credenciais no banco de dados:
+<ul class="org-ul">
+<li>Se as credenciais forem válidas, a API retorna um <b><b>token de autenticação (JWT)</b></b>.</li>
+<li>Se as credenciais forem inválidas, o sistema exibe uma mensagem de erro: "Credenciais inválidas".</li>
+</ul></li>
+
+<li>O sistema armazena o token de autenticação no <b><b>localStorage</b></b> ou <b><b>sessionStorage</b></b> do navegador.</li>
+
+<li>O sistema redireciona o usuário para o painel correspondente ao seu perfil:
+<ul class="org-ul">
+<li><b><b>Administrador</b></b>: Acesso ao painel de configurações administrativas.</li>
+<li><b><b>Funcionário</b></b>: Acesso ao painel de controle com recursos limitados.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org8fad0c6" class="outline-3">
+<h3 id="org8fad0c6"><b><b>Fluxos Alternativos</b></b></h3>
+<div class="outline-text-3" id="text-org8fad0c6">
+<ul class="org-ul">
+<li><b><b>Esquecimento de senha</b></b>:
+<ol class="org-ol">
+<li>O usuário clica no link "Esqueceu a senha?".</li>
+<li>O sistema solicita o e-mail do usuário.</li>
+<li>O usuário recebe um e-mail com um link para redefinir a senha.</li>
+</ol></li>
+
+<li><b><b>Usuário já logado</b></b>:
+<ol class="org-ol">
+<li>Se o usuário já estiver logado, ele é redirecionado diretamente para o painel principal.</li>
+</ol></li>
+</ul>
+
+<p>
+<b><b>Fluxo de Exceção</b></b>
+</p>
+
+<ul class="org-ul">
+<li>Se a API retornar um erro de rede ou falha na validação das credenciais, o sistema exibe uma mensagem de erro: "Erro na autenticação. Tente novamente."</li>
+</ul>
+
+<p>
+<b><b>Pós-condições</b></b>
+</p>
+<ul class="org-ul">
+<li>O usuário está autenticado e possui um token de autenticação válido armazenado no navegador.</li>
+<li>O usuário é redirecionado para o painel correspondente ao seu perfil (Administrador ou Funcionário).</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga416c46" class="outline-3">
+<h3 id="orga416c46"><b><b>Design e Usabilidade</b></b></h3>
+<div class="outline-text-3" id="text-orga416c46">
+<ul class="org-ul">
+<li><b><b>Estética e Layout</b></b>:
+<ul class="org-ul">
+<li>A interface possui um design clean e moderno com predominância de preto e branco.</li>
+<li>Layout responsivo que se adapta a diferentes dispositivos (desktop, tablet, smartphone).</li>
+<li>Ilustração interativa à direita da tela, tornando a interface mais convidativa e amigável.</li>
+</ul></li>
+
+<li><b><b>Acessibilidade e Usabilidade</b></b>:
+<ul class="org-ul">
+<li>O formulário de login é de fácil acesso e possui campos claramente identificados.</li>
+<li>O ícone de alternância da senha oferece uma maneira intuitiva de visualizar a senha digitada.</li>
+<li>O link para recuperação de senha é claramente visível e acessível.</li>
+</ul></li>
+</ul>
+
+<p>
+&#x2014;
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6f461b4" class="outline-2">
+<h2 id="org6f461b4">Fluxo de Cadastro de Funcionário</h2>
+<div class="outline-text-2" id="text-org6f461b4">
+<p>
+<b><b>Pré-condições</b></b>
+</p>
+<ul class="org-ul">
+<li>O administrador está autenticado e tem permissão para cadastrar funcionários.</li>
+<li>O administrador acessa a tela de cadastro de funcionários a partir do dashboard (via sidebar ou menu).</li>
+</ul>
+</div>
+
+<div id="outline-container-orga1f2b87" class="outline-3">
+<h3 id="orga1f2b87"><b><b>Fluxo Principal</b></b></h3>
+<div class="outline-text-3" id="text-orga1f2b87">
+<ol class="org-ol">
+<li>O sistema exibe a tela de cadastro com os seguintes campos obrigatórios:
+<ul class="org-ul">
+<li><b><b>Nome</b></b>: Campo de texto para inserir o nome completo do funcionário.</li>
+<li><b><b>E-mail</b></b>: Campo de texto para o e-mail do funcionário.</li>
+<li><b><b>Cargo</b></b>: Campo de seleção para escolher o cargo do funcionário.</li>
+<li><b><b>Departamento</b></b>: Campo de seleção para escolher o departamento do funcionário.</li>
+<li><b><b>Permissões</b></b>: Checkbox ou lista de seleção múltipla para atribuição de permissões (ex: calendário, relatórios, chats, pagamentos, etc.).</li>
+</ul></li>
+
+<li>O administrador preenche as informações do novo funcionário.</li>
+
+<li>O administrador clica no botão <b><b>"Cadastrar"</b></b>.</li>
+
+<li>O sistema realiza a validação das informações inseridas:
+<ul class="org-ul">
+<li><b><b>E-mail</b></b>: Verifica se o e-mail é válido e não está vazio.</li>
+<li><b><b>Campos obrigatórios</b></b>: Verifica se todos os campos obrigatórios foram preenchidos.</li>
+<li>Se algum dado obrigatório estiver ausente ou o formato for inválido, o sistema exibe uma mensagem de erro e destaca o campo incorreto.</li>
+<li>Se os dados estiverem corretos, o sistema envia uma requisição HTTP para a API para salvar as informações no banco de dados.</li>
+</ul></li>
+
+<li>O sistema atribui permissões ao novo funcionário de acordo com o cargo e o perfil selecionado:
+<ul class="org-ul">
+<li>O administrador pode selecionar permissões para áreas como calendário, relatórios, chats, pagamentos, entre outras.</li>
+</ul></li>
+
+<li>O sistema registra o novo funcionário no banco de dados e envia um e-mail de boas-vindas ao funcionário com instruções de acesso inicial ao sistema.</li>
+
+<li>O administrador é redirecionado para a <b><b>lista de funcionários</b></b> ou recebe uma mensagem de sucesso informando que o cadastro foi realizado com êxito.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org871c2ca" class="outline-3">
+<h3 id="org871c2ca"><b><b>Fluxos Alternativos</b></b></h3>
+<div class="outline-text-3" id="text-org871c2ca">
+<ul class="org-ul">
+<li><b><b>E-mail já cadastrado</b></b>:
+<ol class="org-ol">
+<li>Se o e-mail do funcionário já estiver registrado no sistema, o sistema exibe uma mensagem de erro informando que o e-mail já existe.</li>
+<li>O administrador pode optar por corrigir o e-mail ou cancelar o cadastro.</li>
+</ol></li>
+</ul>
+
+<p>
+<b><b>Fluxo de Exceção</b></b>
+</p>
+
+<ul class="org-ul">
+<li><b><b>Falha na requisição para a API</b></b>:
+<ol class="org-ol">
+<li>Se ocorrer uma falha na comunicação com a API ou no salvamento dos dados, o sistema exibe uma mensagem de erro: "Erro ao cadastrar funcionário. Tente novamente."</li>
+</ol></li>
+</ul>
+
+<p>
+<b><b>Pós-condições</b></b>
+</p>
+<ul class="org-ul">
+<li>O novo funcionário foi registrado no sistema com as permissões atribuídas e recebeu um e-mail de boas-vindas.</li>
+<li>O administrador visualiza a lista de funcionários atualizada ou uma mensagem de sucesso confirmando o cadastro.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4f9df68" class="outline-3">
+<h3 id="org4f9df68"><b><b>Design e Usabilidade</b></b></h3>
+<div class="outline-text-3" id="text-org4f9df68">
+<ul class="org-ul">
+<li><b><b>Estética e Layout</b></b>:
+<ul class="org-ul">
+<li>O formulário possui uma estrutura limpa e intuitiva, com campos bem identificados.</li>
+<li>O layout é responsivo, adaptando-se a diferentes tamanhos de tela (desktop, tablet, smartphone).</li>
+</ul></li>
+
+<li><b><b>Acessibilidade e Usabilidade</b></b>:
+<ul class="org-ul">
+<li>Validação de campos clara, com mensagens de erro visíveis ao lado dos campos com problemas.</li>
+<li>Campos de seleção de permissões bem organizados para facilitar a atribuição de permissões.</li>
+</ul></li>
+</ul>
+
+<p>
+&#x2014;
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org04a2bd5" class="outline-2">
+<h2 id="org04a2bd5">Fluxo de Acesso ao Calendário</h2>
+<div class="outline-text-2" id="text-org04a2bd5">
+<p>
+<b><b>Pré-condições</b></b>
+</p>
+<ul class="org-ul">
+<li>O funcionário está autenticado e tem permissão para acessar o calendário.</li>
+<li>O administrador está autenticado e possui permissões para gerenciar calendários.</li>
+</ul>
+</div>
+
+<div id="outline-container-orgc1fe671" class="outline-3">
+<h3 id="orgc1fe671"><b><b>Fluxo Principal</b></b></h3>
+<div class="outline-text-3" id="text-orgc1fe671">
+<ol class="org-ol">
+<li>O funcionário acessa a tela inicial (dashboard) e encontra o ícone do <b><b>Calendário</b></b> na sidebar.</li>
+
+<li>O sistema exibe o calendário do funcionário, mostrando os compromissos e eventos do mês atual.</li>
+
+<li>O funcionário pode adicionar novos compromissos, como reuniões ou tarefas, clicando em um dia específico no calendário.</li>
+
+<li>Ao clicar em um dia, o sistema exibe um <b><b>modal</b></b> ou página onde o funcionário pode preencher os detalhes do evento, incluindo:
+<ul class="org-ul">
+<li>Nome do evento.</li>
+<li>Hora de início e término.</li>
+<li>Descrição do evento.</li>
+<li>Local (opcional).</li>
+<li>Links para videoconferência (se aplicável).</li>
+</ul></li>
+
+<li>O <b><b>administrador</b></b> pode acessar o calendário de qualquer funcionário ou grupo de funcionários:
+<ul class="org-ul">
+<li>O administrador acessa o calendário a partir da tela "Gerenciamento de Funcionários" ou "Calendário de Equipes".</li>
+<li>O administrador tem acesso a todos os compromissos e eventos atribuídos aos funcionários ou grupos.</li>
+</ul></li>
+
+<li>O <b><b>administrador</b></b> pode adicionar ou editar compromissos no calendário de qualquer funcionário, com as mesmas funcionalidades de um funcionário regular (adicionar, editar e excluir eventos).</li>
+
+<li>O funcionário ou administrador pode <b><b>editar ou excluir compromissos</b></b> diretamente no calendário.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org7867cc2" class="outline-3">
+<h3 id="org7867cc2"><b><b>Fluxos Alternativos</b></b></h3>
+<div class="outline-text-3" id="text-org7867cc2">
+<ul class="org-ul">
+<li><b><b>Horário já ocupado</b></b>:
+<ol class="org-ol">
+<li>Caso o funcionário ou administrador tente adicionar um evento em um horário já ocupado, o sistema exibe uma mensagem de erro: "O horário selecionado está ocupado. Escolha outro horário."</li>
+</ol></li>
+
+<li><b><b>Permissão negada ao administrador</b></b>:
+<ol class="org-ol">
+<li>Se o administrador tentar editar o calendário de um funcionário sem permissões adequadas, o sistema exibe uma mensagem de erro: "Permissão negada para editar o calendário deste funcionário."</li>
+</ol></li>
+</ul>
+
+<p>
+<b><b>Fluxo de Exceção</b></b>
+</p>
+
+<ul class="org-ul">
+<li><b><b>Erro ao salvar evento</b></b>:
+<ol class="org-ol">
+<li>Caso ocorra uma falha na comunicação com a API ou no salvamento de dados, o sistema exibe uma mensagem de erro: "Erro ao salvar o evento. Tente novamente."</li>
+</ol></li>
+</ul>
+
+<p>
+<b><b>Pós-condições</b></b>
+</p>
+<ul class="org-ul">
+<li>O evento é salvo no calendário do funcionário ou grupo de funcionários.</li>
+<li>O administrador tem acesso ao calendário atualizado e pode gerenciar compromissos conforme necessário.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org57066de" class="outline-3">
+<h3 id="org57066de">Estrutura Geral</h3>
+<div class="outline-text-3" id="text-org57066de">
+<p>
+A tela do calendário está dividida em três seções principais:
+</p>
+
+<ol class="org-ol">
+<li><b>Painel esquerdo (barra lateral)</b>:
+<ul class="org-ul">
+<li>Exibe um <b><b>mini calendário mensal</b></b> com os dias destacados.</li>
+<li>Lista os <b><b>eventos do dia</b></b> e próximos compromissos.</li>
+<li>Mostra detalhes como <b><b>temperatura</b></b> e previsões do tempo.</li>
+<li>Inclui <b><b>atalhos</b></b> para adicionar eventos rapidamente.</li>
+</ul></li>
+
+<li><b>Área central (visualização do calendário)</b>:
+<ul class="org-ul">
+<li>Exibe os eventos em um formato de <b><b>agenda semanal</b></b>.</li>
+<li>Permite alternar entre <b><b>visualizações diárias, semanais, mensais e anuais</b></b>.</li>
+<li>Mostra compromissos organizados por horário e <b><b>cor para diferenciar categorias</b></b>.</li>
+</ul></li>
+
+<li><b>Barra superior</b>:
+<ul class="org-ul">
+<li>Contém <b><b>botões de navegação</b></b> entre datas.</li>
+<li>Possui um <b><b>campo de busca</b></b> para encontrar eventos rapidamente.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgf4aa6de" class="outline-3">
+<h3 id="orgf4aa6de">Funcionalidades do Calendário</h3>
+<div class="outline-text-3" id="text-orgf4aa6de">
+<ul class="org-ul">
+<li><b><b>Criação e edição de eventos</b></b>: Adicionar novos compromissos rapidamente.</li>
+<li><b><b>Integração com videoconferências</b></b>: Links diretos para reuniões online.</li>
+<li><b><b>Categorização por cor</b></b>: Diferencia eventos por importância ou tipo.</li>
+<li><b><b>Notificações e lembretes</b></b>: Alerta sobre reuniões futuras.</li>
+<li><b><b>Eventos recorrentes</b></b>: Suporte para compromissos diários, semanais ou mensais.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org9170671" class="outline-3">
+<h3 id="org9170671"><b><b>Design e Usabilidade</b></b></h3>
+<div class="outline-text-3" id="text-org9170671">
+<ul class="org-ul">
+<li><b><b>Interface clara e intuitiva</b></b>, com contraste suficiente para fácil leitura.</li>
+<li><b><b>Cores distintas</b></b> ajudam a diferenciar tipos de eventos.</li>
+<li><b><b>Modo escuro</b></b> no painel lateral, proporcionando melhor visibilidade.</li>
+<li><b><b>Organização lógica e fluida</b></b>, permitindo rápida navegação e gerenciamento dos compromissos.</li>
+<li><b><b>Responsividade</b></b> para diferentes tamanhos de tela e dispositivos.</li>
+</ul>
+
+<p>
+&#x2014;
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4c7ba8d" class="outline-2">
+<h2 id="org4c7ba8d">Fluxo de Navegação no Dashboard</h2>
+<div class="outline-text-2" id="text-org4c7ba8d">
+<p>
+<b><b>Pré-condições</b></b>
+</p>
+<ul class="org-ul">
+<li>O funcionário está autenticado e tem acesso ao dashboard.</li>
+</ul>
+</div>
+
+<div id="outline-container-org4732320" class="outline-3">
+<h3 id="org4732320"><b><b>Fluxo Principal</b></b></h3>
+<div class="outline-text-3" id="text-org4732320">
+<ol class="org-ol">
+<li>O funcionário acessa a tela inicial (dashboard) após fazer login.</li>
+
+<li>O sistema exibe a tela inicial com as seguintes opções no menu lateral (sidebar):
+<ul class="org-ul">
+<li><b><b>Dashboard (ativo)</b></b>: Exibe um resumo geral das métricas e dados.</li>
+<li><b><b>Calendário</b></b>: Acesso ao calendário pessoal e eventos.</li>
+<li><b><b>E-mail</b></b>: Acesso à caixa de entrada de e-mails.</li>
+<li><b><b>Área de Pagamentos</b></b>: Acesso à página de históricos de pagamentos.</li>
+<li><b><b>Clientes</b></b>: Acesso à lista de clientes da empresa e seus detalhes.</li>
+<li><b><b>Raids</b></b>: Acesso ao sistema de gestão de raids (caso exista).</li>
+<li><b><b>Chat</b></b>: Acesso ao chat de equipe para comunicação interna.</li>
+<li><b><b>Campanhas</b></b>: Acesso a campanhas de marketing ou vendas.</li>
+<li><b><b>Tela de Serviços</b></b>: Acesso a serviços ou funcionalidades adicionais.</li>
+<li><b><b>Flow</b></b>: Acesso ao editor de fluxos de automação.</li>
+<li><b><b>Suporte e Configurações</b></b>: Acesso ao suporte e às configurações do sistema.</li>
+</ul></li>
+
+<li>Além disso, o dashboard exibe as seguintes seções e widgets informativos:
+<ul class="org-ul">
+<li><b><b>📊 Seção de Resultados Finais</b></b>: Gráfico de barras mensais com métricas de desempenho.</li>
+<li><b><b>📆 Mini Calendário</b></b>: Exibe um calendário pequeno com os eventos do mês atual.</li>
+<li><b><b>📞 Chamados Abertos</b></b>: Exibe o número de chamados abertos e em fila para atendimento.</li>
+<li><b><b>💰 Lucro Líquido</b></b>: Exibe o lucro do mês ou do período selecionado, com comparações de crescimento.</li>
+<li><b><b>🔥 Mapa de Calor</b></b>: Representa a densidade de atividade ao longo da semana e do dia.</li>
+<li><b><b>🖥 Lista de Funcionários Online</b></b>: Mostra quais funcionários estão online no sistema no momento.</li>
+</ul></li>
+
+<li>O funcionário pode acessar qualquer uma dessas áreas clicando nas opções da sidebar.</li>
+
+<li>O sistema atualiza as seções e widgets conforme o funcionário interage com o dashboard, exibindo informações em tempo real ou conforme a configuração de atualizações.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgb61a8e3" class="outline-3">
+<h3 id="orgb61a8e3"><b><b>Fluxos Alternativos</b></b></h3>
+<div class="outline-text-3" id="text-orgb61a8e3">
+<ul class="org-ul">
+<li><b><b>Acesso Restrito</b></b>:
+<ol class="org-ol">
+<li>Caso o funcionário não tenha permissões para acessar determinada área (ex: área de pagamento), ele verá uma mensagem de erro: "Acesso Restrito". O sistema impedirá o acesso à página solicitada.</li>
+</ol></li>
+
+<li><b><b>Falha de Conexão</b></b>:
+<ol class="org-ol">
+<li>Caso o sistema detecte uma falha de conexão, será exibida a mensagem: "Conexão Perdida".</li>
+<li>O sistema tentará reconectar automaticamente ou fornecerá a opção para o usuário tentar novamente.</li>
+</ol></li>
+</ul>
+
+<p>
+<b><b>Recursos Extras</b></b>
+</p>
+
+<ul class="org-ul">
+<li><b><b>Botão de Calendário e Perfil</b></b>: Localizado no canto superior direito, permite ao usuário acessar configurações pessoais, como preferências de calendário e perfil.</li>
+
+<li><b><b>Campo de Busca</b></b>: O funcionário pode usar o campo de busca para encontrar dados rapidamente no sistema. Ele pode pesquisar por eventos, funcionários, ou informações relacionadas às métricas do dashboard.</li>
+
+<li><b><b>Filtros</b></b>: O sistema oferece filtros personalizados para exibição de dados. O funcionário pode ajustar os filtros de tempo, tipo de evento, e outros parâmetros para exibir informações específicas e facilitar a análise.</li>
+</ul>
+
+<p>
+<b><b>Pós-condições</b></b>
+</p>
+<ul class="org-ul">
+<li>O funcionário tem acesso completo às áreas do dashboard conforme suas permissões.</li>
+<li>As seções e widgets do dashboard são atualizados em tempo real ou conforme configurado.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7c265b2" class="outline-3">
+<h3 id="org7c265b2"><b><b>Design e Usabilidade</b></b></h3>
+<div class="outline-text-3" id="text-org7c265b2">
+<ul class="org-ul">
+<li><b><b>Interface clara e limpa</b></b>: O layout da sidebar e do dashboard é intuitivo, com contraste adequado para fácil leitura.</li>
+<li><b><b>Organização lógica</b></b>: As opções do menu lateral são divididas por categorias e são facilmente acessíveis.</li>
+<li><b><b>Responsividade</b></b>: O dashboard se adapta a diferentes dispositivos, garantindo usabilidade em desktops, tablets e smartphones.</li>
+<li><b><b>Acessibilidade</b></b>: Elementos interativos como botões, campos de busca e widgets têm indicadores visuais claros para interatividade.</li>
+</ul>
+
+<p>
+&#x2014;
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org4d5c708" class="outline-2">
+<h2 id="org4d5c708">Fluxo de Chat</h2>
+<div class="outline-text-2" id="text-org4d5c708">
+<p>
+<b><b>Pré-condições</b></b>
+</p>
+<ul class="org-ul">
+<li>O usuário está autenticado e tem acesso à área de chat.</li>
+</ul>
+</div>
+
+<div id="outline-container-org364dbff" class="outline-3">
+<h3 id="org364dbff"><b><b>Fluxo Principal</b></b></h3>
+<div class="outline-text-3" id="text-org364dbff">
+<ol class="org-ol">
+<li>O usuário acessa o <b><b>Chat</b></b> através da sidebar no dashboard.</li>
+
+<li>O sistema exibe a interface de chat organizada da seguinte forma:
+<ul class="org-ul">
+<li><b><b>Sidebar Esquerda</b></b>: Menu de navegação com acesso aos seguintes módulos:
+<ul class="org-ul">
+<li><b><b>Dashboard</b></b>: Exibe o resumo geral das métricas e dados.</li>
+<li><b><b>E-mail</b></b>: Acesso à caixa de entrada de e-mails.</li>
+<li><b><b>Pagamentos</b></b>: Acesso aos históricos de pagamentos.</li>
+<li><b><b>Clientes</b></b>: Acesso à lista de clientes e seus detalhes.</li>
+<li><b><b>Raids</b></b>: Acesso ao sistema de gestão de raids.</li>
+<li><b><b>Team Chat</b></b>: Acesso ao chat de equipe, onde as conversas internas acontecem.</li>
+<li><b><b>Campanhas</b></b>: Acesso às campanhas de marketing ou vendas.</li>
+<li><b><b>Tela de Serviços</b></b>: Acesso a serviços ou funcionalidades adicionais.</li>
+<li><b><b>Calendário</b></b>: Acesso ao calendário de compromissos e eventos.</li>
+<li><b><b>Flow</b></b>: Acesso ao editor de fluxos de automação.</li>
+</ul></li>
+
+<li><b><b>Área de Mensagens</b></b>: Exibe uma lista de conversas recentes, com as seguintes informações:
+<ul class="org-ul">
+<li><b><b>Nome</b></b> do contato ou grupo.</li>
+<li><b><b>Última mensagem</b></b> enviada.</li>
+<li><b><b>Horário</b></b> da última mensagem.</li>
+<li><b><b>Ícones indicativos</b></b> de status, como reações, chamadas perdidas, mensagens não lidas, entre outros.</li>
+</ul></li>
+
+<li><b><b>Área de Chat</b></b>: Exibe a janela central onde as mensagens entre os participantes são trocadas. A janela de chat inclui:
+<ul class="org-ul">
+<li><b><b>Campo de digitação</b></b> para inserir mensagens.</li>
+<li><b><b>Botões de envio</b></b>: Envio de texto e outros tipos de mensagem, como emojis, arquivos ou links.</li>
+<li><b><b>Histórico de mensagens</b></b>: Exibe o histórico de mensagens trocadas entre os participantes.</li>
+</ul></li>
+</ul></li>
+
+<li>O usuário pode selecionar uma conversa na <b><b>Área de Mensagens</b></b> para abrir a conversa desejada na <b><b>Área de Chat</b></b>.</li>
+
+<li>O usuário digita a mensagem e clica no botão <b><b>"Enviar"</b></b> para enviar a mensagem ao contato ou grupo selecionado.</li>
+
+<li>O sistema atualiza a <b><b>Área de Mensagens</b></b> com a última mensagem enviada e a exibe na <b><b>Área de Chat</b></b>.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org124112e" class="outline-3">
+<h3 id="org124112e"><b><b>Fluxos Alternativos</b></b></h3>
+<div class="outline-text-3" id="text-org124112e">
+<ul class="org-ul">
+<li><b><b>Mensagem Não Enviada</b></b>:
+<ol class="org-ol">
+<li>Se o sistema não conseguir enviar a mensagem devido a problemas de conexão ou outro erro, o sistema exibirá uma mensagem de erro: "Falha ao enviar mensagem". O usuário poderá tentar reenviar a mensagem ou verificar a conexão.</li>
+</ol></li>
+
+<li><b><b>Novo Contato ou Grupo</b></b>:
+<ol class="org-ol">
+<li>Caso o usuário deseje iniciar uma nova conversa, ele pode clicar em um botão de <b><b>"Novo Chat"</b></b> para buscar e adicionar contatos ou criar um grupo de chat.</li>
+<li>O sistema exibirá um formulário para selecionar os participantes da conversa e iniciar o chat.</li>
+</ol></li>
+</ul>
+
+<p>
+<b><b>Recursos Extras</b></b>
+</p>
+
+<ul class="org-ul">
+<li><b><b>Notificações</b></b>: O sistema envia notificações para o usuário quando uma nova mensagem chega, caso ele não esteja com a janela de chat aberta.</li>
+
+<li><b><b>Reações e Emojis</b></b>: O usuário pode reagir às mensagens enviadas utilizando emojis, e essas reações são visíveis para os participantes da conversa.</li>
+
+<li><b><b>Envio de Arquivos</b></b>: O usuário pode anexar arquivos como imagens, documentos ou outros tipos de mídia durante a conversa.</li>
+
+<li><b><b>Pesquisa de Mensagens</b></b>: O sistema oferece um campo de busca para encontrar mensagens específicas dentro de conversas ou chats.</li>
+</ul>
+
+<p>
+<b><b>Pós-condições</b></b>
+</p>
+<ul class="org-ul">
+<li>A conversa é registrada e aparece no histórico de mensagens da <b><b>Área de Mensagens</b></b>.</li>
+<li>O sistema mantém o histórico de mensagens de forma persistente, permitindo que o usuário acesse as conversas anteriores a qualquer momento.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga7b8a01" class="outline-3">
+<h3 id="orga7b8a01"><b><b>Design e Usabilidade</b></b></h3>
+<div class="outline-text-3" id="text-orga7b8a01">
+<ul class="org-ul">
+<li><b><b>Interface intuitiva</b></b>: A navegação no chat é simples e permite fácil acesso às mensagens, grupos e contatos.</li>
+
+<li><b><b>Organização clara</b></b>: As conversas são exibidas de maneira cronológica e os ícones indicativos tornam a visualização rápida e eficiente.</li>
+
+<li><b><b>Responsividade</b></b>: O layout do chat se adapta para diferentes dispositivos, como desktops, tablets e smartphones, garantindo uma experiência consistente.</li>
+
+<li><b><b>Notificações visíveis</b></b>: Mensagens não lidas ou chamadas perdidas são claramente indicadas, proporcionando fácil monitoramento da atividade no chat.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgf4fe2b1" class="outline-3">
+<h3 id="orgf4fe2b1">Funcionalidades do Chat</h3>
+<div class="outline-text-3" id="text-orgf4fe2b1">
+<ol class="org-ol">
+<li><b><b>Campo de Digitação</b></b>:
+<ul class="org-ul">
+<li>O usuário pode escrever mensagens no campo de entrada e enviá-las ao clicar no botão <b><b>"Enviar"</b></b>.</li>
+</ul></li>
+
+<li><b><b>Ícones Adicionais no Campo de Entrada</b></b>:
+<ul class="org-ul">
+<li>O campo de digitação conta com ícones para facilitar a interação, como:
+<ul class="org-ul">
+<li><b><b>Anexos</b></b>: O usuário pode anexar arquivos ou imagens ao clicar no ícone de <b><b>clip</b></b>.</li>
+<li><b><b>Emojis</b></b>: O usuário pode adicionar emojis às mensagens clicando no ícone de <b><b>rosto sorridente</b></b>.</li>
+<li><b><b>Menções</b></b>: O usuário pode mencionar outras pessoas ou grupos no chat ao digitar <b><b>@</b></b> seguido do nome ou grupo desejado.</li>
+</ul></li>
+</ul></li>
+
+<li><b><b>Indicação de Mensagens Lidas ou Recebidas</b></b>:
+<ul class="org-ul">
+<li>Pequenos ícones são exibidos ao lado de cada mensagem para indicar se ela foi lida ou recebida:
+<ul class="org-ul">
+<li><b><b>Ícone de check verde</b></b>: Indica que a mensagem foi <b><b>recebida</b></b>.</li>
+<li><b><b>Ícone de círculo azul</b></b>: Indica que a mensagem foi <b><b>lida</b></b>.</li>
+</ul></li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgdfd7892" class="outline-3">
+<h3 id="orgdfd7892">Funcionalidades Extras do Chat</h3>
+<div class="outline-text-3" id="text-orgdfd7892">
+<ol class="org-ol">
+<li><b><b>Perfil do Contato à Direita</b></b>:
+<ul class="org-ul">
+<li>Ao selecionar um contato ou grupo, a área à direita exibe o <b><b>perfil</b></b> do contato com as seguintes informações:
+<ul class="org-ul">
+<li><b><b>Nome</b></b>: Nome do contato.</li>
+<li><b><b>Telefone</b></b>: Número de telefone do contato.</li>
+<li><b><b>E-mail</b></b>: E-mail do contato.</li>
+<li><b><b>Cargo</b></b>: Cargo ou função do contato na empresa.</li>
+<li><b><b>Status de Lead</b></b>: Exemplo de status como <b><b>Novo</b></b>, <b><b>Qualificado</b></b>, <b><b>Convertido</b></b>, etc.</li>
+<li><b><b>Quem Criou o Contato</b></b>: Informação sobre o usuário responsável pela criação do contato.</li>
+</ul></li>
+</ul></li>
+
+<li><b><b>Notas Rápidas</b></b>:
+<ul class="org-ul">
+<li>Uma seção na interface permite aos usuários adicionar <b><b>notas rápidas</b></b> sobre o contato ou a conversa em andamento.</li>
+<li>As notas são <b><b>compartilhadas entre os membros da equipe</b></b>, permitindo que todos visualizem as anotações sobre o cliente ou a conversa.</li>
+</ul></li>
+
+<li><b><b>Filtros de Pesquisa e Organização</b></b>:
+<ul class="org-ul">
+<li>A lista de conversas pode ser pesquisada por palavras-chave, nome do contato ou outras métricas, permitindo uma rápida localização de conversas.</li>
+<li><b><b>Filtros avançados</b></b> permitem organizar as conversas de acordo com o <b><b>status</b></b> (ex: <b><b>Novo</b></b>, <b><b>Aguardando Resposta</b></b>) ou <b><b>data</b></b> (ex: <b><b>Últimos 7 dias</b></b>, <b><b>Este Mês</b></b>, etc.).</li>
+</ul></li>
+
+<li><b><b>Chamadas e Videoconferência</b></b>:
+<ul class="org-ul">
+<li>Ícones de chamada de voz e videoconferência são exibidos na parte superior do chat, permitindo que os usuários façam:
+<ul class="org-ul">
+<li><b><b>Chamadas de voz</b></b>: Ao clicar no ícone de telefone.</li>
+<li><b><b>Videoconferências</b></b>: Ao clicar no ícone de câmera de vídeo, os participantes podem se conectar em uma chamada de vídeo diretamente do chat.</li>
+</ul></li>
+</ul></li>
+</ol>
+
+<p>
+&#x2014;
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgcb1365d" class="outline-2">
+<h2 id="orgcb1365d">Fluxo de Acesso à Área de Pagamentos</h2>
+<div class="outline-text-2" id="text-orgcb1365d">
+<p>
+<b><b>Estrutura Geral</b></b>:
+</p>
+<ul class="org-ul">
+<li><b><b>Logotipo (HuzunSlug)</b></b>: Posicionado no canto superior esquerdo.</li>
+<li><b><b>Formulário de login</b></b>: Caixa branca no lado esquerdo da tela, contendo os campos de entrada.</li>
+<li><b><b>Ilustração visual</b></b>: No lado direito, há uma ilustração representando duas pessoas interagindo.</li>
+</ul>
+
+<p>
+<b><b>Funcionalidades do Formulário</b></b>:
+</p>
+<ul class="org-ul">
+<li><b><b>Campo de Nome de Usuário</b></b>:
+<ul class="org-ul">
+<li>Permite inserir o nome de usuário para autenticação.</li>
+<li>Placeholder: "Digite seu nome de usuário".</li>
+</ul></li>
+<li><b><b>Campo de Senha</b></b>:
+<ul class="org-ul">
+<li>Entrada de senha protegida (com ícone para alternar a visibilidade).</li>
+<li>Placeholder: "Digite sua senha".</li>
+</ul></li>
+<li><b><b>Opção "Lembre de mim"</b></b>:
+<ul class="org-ul">
+<li>Checkbox para manter o usuário logado.</li>
+</ul></li>
+<li><b><b>Link "Esqueceu a senha?"</b></b>:
+<ul class="org-ul">
+<li>Permite recuperação de senha caso o usuário tenha esquecido.</li>
+</ul></li>
+<li><b><b>Botão "Login"</b></b>:
+<ul class="org-ul">
+<li>Botão preto destacado para envio das credenciais.</li>
+</ul></li>
+</ul>
+</div>
+
+<div id="outline-container-org3c29d01" class="outline-3">
+<h3 id="org3c29d01"><b><b>Design e Usabilidade</b></b>:</h3>
+<div class="outline-text-3" id="text-org3c29d01">
+<ul class="org-ul">
+<li><b><b>Estética clean e moderna</b></b>: Uso de preto e branco, fontes limpas e elementos bem organizados.</li>
+<li><b><b>Layout responsivo</b></b>: Provavelmente se adapta bem a diferentes tamanhos de tela.</li>
+<li><b><b>Ilustração interativa</b></b>: Torna a tela mais convidativa e amigável.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org792e681" class="outline-3">
+<h3 id="org792e681"><b><b>Fluxos Alternativos</b></b>:</h3>
+<div class="outline-text-3" id="text-org792e681">
+<ul class="org-ul">
+<li>Caso as credenciais de login sejam inválidas, o sistema exibe uma mensagem de erro.</li>
+<li>Caso o usuário tenha esquecido a senha, ele pode clicar em <b><b>"Esqueceu a senha?"</b></b> para iniciar o processo de recuperação.</li>
+</ul>
+
+<p>
+&#x2014;
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6eef5f3" class="outline-2">
+<h2 id="org6eef5f3">Fluxo de Acesso à Página de Clientes</h2>
+<div class="outline-text-2" id="text-org6eef5f3">
+<ol class="org-ol">
+<li>O usuário acessa a página de <b><b>Clientes</b></b> através do menu lateral no Dashboard.</li>
+<li>O sistema exibe duas seções principais:
+<ul class="org-ul">
+<li><b><b>Lista de Clientes</b></b> à esquerda, com detalhes como nome, status, contato e tags.</li>
+<li><b><b>Perfil Detalhado do Cliente</b></b> à direita, exibindo informações pessoais e médicas.</li>
+</ul></li>
+<li>Na <b><b>barra superior</b></b>, são apresentadas ações rápidas, incluindo:
+<ul class="org-ul">
+<li><b><b>Busca</b></b> de clientes.</li>
+<li><b><b>Exportação de dados</b></b> em CSV.</li>
+<li><b><b>Adição de novos clientes</b></b>.</li>
+</ul></li>
+</ol>
+</div>
+
+<div id="outline-container-org6fb3a2b" class="outline-3">
+<h3 id="org6fb3a2b"><b><b>Fluxos Alternativos</b></b>:</h3>
+<div class="outline-text-3" id="text-org6fb3a2b">
+<ul class="org-ul">
+<li>Caso o usuário não tenha permissões para acessar a página de clientes, o sistema exibirá uma mensagem de "Acesso Negado".</li>
+</ul>
+
+<p>
+&#x2014;
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8cf864a" class="outline-2">
+<h2 id="org8cf864a">Funcionalidades do Perfil de Clientes</h2>
+<div class="outline-text-2" id="text-org8cf864a">
+<p>
+<b><b>Lista de Clientes</b></b>:
+</p>
+
+<ol class="org-ol">
+<li>Exibição de <b><b>clientes</b></b> com informações como:
+<ul class="org-ul">
+<li><b><b>Status</b></b>: (Ativo, Inativo, etc.)</li>
+<li><b><b>Contato</b></b>: telefone e e-mail.</li>
+<li><b><b>Tags</b></b>: Etiquetas para classificar clientes (ex: "Alto risco", "Urgente").</li>
+</ul></li>
+<li>Opção para <b><b>selecionar todos os clientes</b></b> e realizar ações em massa (ex: exportar dados ou alterar status).</li>
+<li><b><b>Ícones de Edição</b></b>: Permite modificar informações de clientes diretamente na lista.</li>
+<li><b><b>Botões de Ação Rápida</b></b>:
+<ul class="org-ul">
+<li><b><b>Busca</b></b>: Pesquisa de clientes por nome ou e-mail.</li>
+<li><b><b>Exportação de Dados</b></b>: Exporta a lista de clientes em formato CSV.</li>
+</ul></li>
+</ol>
+
+<p>
+<b><b>Perfil Individual do Cliente</b></b>:
+</p>
+
+<ol class="org-ol">
+<li><b><b>Foto de Perfil e Nome</b></b>: Exibe a imagem do cliente e nome completo.</li>
+<li><b><b>Informações de Contato</b></b>: Inclui telefone, e-mail e opções de edição.</li>
+<li><b><b>Dados Médicos</b></b>: Organizados por categorias:
+<ul class="org-ul">
+<li><b><b>Encontros</b></b>: Registro de visitas e consultas anteriores.</li>
+<li><b><b>Medicamentos</b></b>: Lista de medicamentos prescritos.</li>
+<li><b><b>Alergias</b></b>: Informações sobre alergias e reações.</li>
+<li><b><b>Histórico Médico</b></b>: Relatos médicos importantes ou históricos.</li>
+<li><b><b>Notas</b></b>: Espaço para o profissional adicionar anotações.</li>
+</ul></li>
+<li><b><b>Próxima Consulta</b></b>: A próxima consulta é destacada com data e horário.</li>
+<li><b><b>Condições Ativas</b></b>: Exibição de condições médicas ativas do cliente, como hipertensão, diabetes, dermatite, etc., com etiquetas indicativas.</li>
+</ol>
+
+<p>
+&#x2014;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9995113" class="outline-2">
+<h2 id="org9995113">Fluxo de E-mail</h2>
+<div class="outline-text-2" id="text-org9995113">
+<ol class="org-ol">
+<li>O usuário acessa a página de <b><b>E-mail</b></b> a partir do dashboard.</li>
+<li>A interface de e-mail é dividida em:
+<ul class="org-ul">
+<li><b><b>Menu lateral esquerdo</b></b> com categorias: Caixa de Entrada, Comerciais, Enviados, Spam, Lixeira e Rascunhos.</li>
+<li><b><b>Lista de E-mails</b></b> exibindo detalhes como remetente, assunto, status de leitura e horário.</li>
+<li><b><b>Painel de Leitura de E-mails</b></b> à direita, com mensagens organizadas por conversas (threads).</li>
+<li><b><b>Barra Superior de Ações</b></b>, incluindo respostas, encaminhamento, arquivamento e pesquisa.</li>
+</ul></li>
+</ol>
+
+<p>
+<b><b>Funcionalidades</b></b>:
+</p>
+<ul class="org-ul">
+<li>Organização de e-mails por status de leitura e categorias.</li>
+<li>Opção de <b><b>marcar como lido/não lido</b></b>, <b><b>mover e-mails para pastas</b></b>.</li>
+<li>Respostas e encaminhamentos rápidos.</li>
+<li><b><b>Barra de pesquisa</b></b> para localização rápida de e-mails.</li>
+</ul>
+
+<p>
+&#x2014;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org91fdcaf" class="outline-2">
+<h2 id="org91fdcaf">Fluxo da Página de Suporte</h2>
+<div class="outline-text-2" id="text-org91fdcaf">
+<ol class="org-ol">
+<li>O usuário acessa a tela de suporte a partir do menu lateral no dashboard ou pelo acesso direto.</li>
+<li>O sistema exibe a tela de suporte organizada em três áreas principais:
+<ul class="org-ul">
+<li><b><b>Painel Lateral Esquerdo</b></b>: Contém a marca "HuzunSlug" no topo, um campo de busca para localizar funcionalidades rapidamente e uma lista de seções (Dashboard, Email, Pagamentos, Clientes, Raids, Team Chat, Campanhas, Tela de serviços, Calendário, Flow).</li>
+<li><b><b>Área Central</b></b>: Exibe a interface do chatbot inteligente, com a mensagem "Olá, sou o Vanguard. Como posso ajudar hoje?".</li>
+<li><b><b>Campo de Entrada de Texto</b></b>: Localizado na parte inferior da tela, permitindo ao usuário digitar perguntas para o suporte e enviar arquivos através de um ícone de anexo.</li>
+</ul></li>
+
+<li>O usuário pode interagir com o <b><b>chatbot inteligente</b></b>, chamado "Vanguard", para obter respostas rápidas.</li>
+<li>O <b><b>campo de busca</b></b> permite que o usuário encontre rapidamente funcionalidades ou informações dentro da plataforma.</li>
+<li>Caso o usuário precise enviar mais informações, ele pode <b><b>anexar arquivos</b></b> através do ícone de anexo no campo de entrada de texto.</li>
+<li>O painel lateral oferece uma navegação rápida para outras áreas da plataforma, como o <b><b>Dashboard</b></b>, <b><b>E-mail</b></b>, <b><b>Pagamentos</b></b>, <b><b>Clientes</b></b>, <b><b>Raids</b></b>, <b><b>Team Chat</b></b>, <b><b>Campanhas</b></b>, <b><b>Tela de Serviços</b></b>, <b><b>Calendário</b></b> e <b><b>Flow</b></b>.</li>
+</ol>
+</div>
+
+<div id="outline-container-org944957e" class="outline-3">
+<h3 id="org944957e"><b><b>Fluxos Alternativos</b></b>:</h3>
+<div class="outline-text-3" id="text-org944957e">
+<ul class="org-ul">
+<li>Caso o chatbot não consiga fornecer uma resposta adequada, ele poderá direcionar o usuário para o suporte humano ou fornecer uma mensagem de "Solicitação registrada, entraremos em contato em breve".</li>
+<li>Se o usuário não encontrar o que procura no campo de busca, será possível realizar uma pesquisa mais detalhada ou obter ajuda do suporte via chatbot.</li>
+</ul>
+
+<p>
+<b><b>Recursos Extras</b></b>:
+</p>
+<ul class="org-ul">
+<li><b><b>Botões de navegação</b></b> no painel lateral para acesso rápido às outras funcionalidades.</li>
+<li><b><b>Possibilidade de anexar arquivos</b></b> para dar mais contexto ao pedido de suporte.</li>
+</ul>
+
+<p>
+&#x2014;
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2025-03-25 Tue 22:17</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

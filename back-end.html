@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-03-25 Tue 20:01 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Back End Completo</title>
+<meta name="description" content="Back End da Aplicação
+Header" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="src/readtheorg_theme/css/search.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/search.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+<script type="text/javascript">disableSearch();</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Back End Completo</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc4ebcab">Visão Geral</a></li>
+<li><a href="#orgd0cf020">Arquitetura e Banco de Dados</a></li>
+<li><a href="#org6c305a4">Fluxo de Desenvolvimento</a></li>
+<li><a href="#org9f05e50">Boas Práticas</a></li>
+<li><a href="#org84739d7">Tecnologias Utilizadas</a></li>
+<li><a href="#org483b0e6">Fluxo da API</a></li>
+</ul>
+</div>
+</div>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><a href="index.html">Home</a></td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><b><b>Stack</b></b></td>
+<td class="org-left"><b><b>Fluxos e Casos de Uso</b></b></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="back-end.html">Back-End</a></td>
+<td class="org-left"><a href="fluxos-casos-uso.html">Fluxos e Casos de Uso</a></td>
+</tr>
+
+<tr>
+<td class="org-left"><a href="front-end.html">Front-End</a></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+
+<div id="outline-container-orgc4ebcab" class="outline-2">
+<h2 id="orgc4ebcab">Visão Geral</h2>
+<div class="outline-text-2" id="text-orgc4ebcab">
+<p>
+O back-end da aplicação é baseado em uma API desenvolvida com <b>FastAPI</b>, responsável por gerenciar as principais funcionalidades da plataforma, incluindo:  
+</p>
+
+<ul class="org-ul">
+<li>Cadastro de empresas e funcionários</li>
+<li>Chat corporativo</li>
+<li>Calendário da empresa e dos funcionários</li>
+<li>Gerenciamento de funcionários e permissões</li>
+<li>Administração da empresa</li>
+<li>Logs e auditoria</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd0cf020" class="outline-2">
+<h2 id="orgd0cf020">Arquitetura e Banco de Dados</h2>
+<div class="outline-text-2" id="text-orgd0cf020">
+<p>
+A aplicação utiliza três bancos de dados para otimizar desempenho e escalabilidade:  
+</p>
+
+<ol class="org-ol">
+<li><b><b>PostgreSQL</b></b> - Banco relacional principal, armazenando todas as informações críticas da aplicação.</li>
+<li><b><b>Redis</b></b> - Utilizado para <b>cache</b>, evitando sobrecarga do sistema e melhorando a performance.</li>
+<li><b><b>MongoDB</b></b> - Armazena logs e auditorias, com deleção automática de registros após 1 ano.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org6c305a4" class="outline-2">
+<h2 id="org6c305a4">Fluxo de Desenvolvimento</h2>
+<div class="outline-text-2" id="text-org6c305a4">
+<p>
+O repositório segue um fluxo simplificado do <b>Git Flow</b>, com as seguintes branches principais:  
+</p>
+
+<ul class="org-ul">
+<li>`main` → Produção</li>
+<li>`qa` → Testes internos</li>
+<li>`dev` → Desenvolvimento ativo  
+<ul class="org-ul">
+<li>Features devem ser desenvolvidas em branches separadas a partir de `dev`.</li>
+</ul></li>
+</ul>
+
+<p>
+O deploy é realizado automaticamente para a plataforma <b>Render</b>, utilizando a branch `qa` para testes internos.  
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9f05e50" class="outline-2">
+<h2 id="org9f05e50">Boas Práticas</h2>
+<div class="outline-text-2" id="text-org9f05e50">
+<ul class="org-ul">
+<li><b><b>Testes</b></b>:  
+<ul class="org-ul">
+<li>Toda nova funcionalidade deve incluir testes unitários.</li>
+<li>PRs sem testes serão recusadas.</li>
+</ul></li>
+
+<li><b><b>Commits</b></b>:  
+<ul class="org-ul">
+<li>Seguir a convenção <b>Conventional Commits</b> para manter um histórico organizado e semântico.</li>
+</ul></li>
+
+<li><b><b>Code Review</b></b>:  
+<ul class="org-ul">
+<li>O código deve ser revisado antes do <b>merge</b> em `qa` ou `main`.</li>
+<li>Feedbacks devem ser resolvidos antes da aprovação.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org84739d7" class="outline-2">
+<h2 id="org84739d7">Tecnologias Utilizadas</h2>
+<div class="outline-text-2" id="text-org84739d7">
+<p>
+A stack do back-end foi escolhida para garantir <b><b>performance, escalabilidade e facilidade de manutenção</b></b>.  
+</p>
+
+<ul class="org-ul">
+<li><b><b>Linguagem</b></b>:  
+<ul class="org-ul">
+<li>Python → Principal linguagem de desenvolvimento.</li>
+</ul></li>
+
+<li><b><b>Framework</b></b>:  
+<ul class="org-ul">
+<li>FastAPI → Framework leve e eficiente para construção de APIs assíncronas.</li>
+</ul></li>
+
+<li><b><b>Testes</b></b>:  
+<ul class="org-ul">
+<li>Pytest → Framework para criação e execução de testes automatizados.</li>
+</ul></li>
+
+<li><b><b>Banco de dados</b></b>:  
+<ul class="org-ul">
+<li>PostgreSQL → Banco relacional principal.</li>
+<li>Redis → Utilizado para <b>cache</b> e otimização de performance.</li>
+<li>MongoDB → Armazena logs e auditorias, com deleção automática após 1 ano.</li>
+</ul></li>
+
+<li><b><b>Filas e Mensageria</b></b>:  
+<ul class="org-ul">
+<li>RabbitMQ → Utilizado para comunicação assíncrona e processamento de tarefas em background.</li>
+</ul></li>
+
+<li><b><b>Infraestrutura</b></b>:  
+<ul class="org-ul">
+<li>Docker → Contêinerização para padronização do ambiente.</li>
+<li>Kubernetes → Orquestração dos contêineres para escalabilidade e gerenciamento eficiente.</li>
+</ul></li>
+
+<li><b><b>Monitoramento e Observabilidade</b></b>:  
+<ul class="org-ul">
+<li>Prometheus → Coleta e armazenamento de métricas do sistema.</li>
+<li>Grafana → Visualização de métricas e dashboards para monitoramento.</li>
+</ul></li>
+
+<li><b><b>CI/CD (Integração Contínua e Deploy Contínuo)</b></b>:  
+<ul class="org-ul">
+<li>GitHub Actions → Automatização de testes e deploys.</li>
+<li>Render → Plataforma onde a aplicação será implantada para testes internos.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org483b0e6" class="outline-2">
+<h2 id="org483b0e6">Fluxo da API</h2>
+<div class="outline-text-2" id="text-org483b0e6">
+<p>
+O <b>Back-End</b> segue um fluxo estruturado para processar requisições e retornar respostas de forma eficiente.  
+</p>
+
+
+<div id="org4e7c55e" class="figure">
+<p><img src="./assets/images/fluxo_api.png" alt="fluxo_api.png" />
+</p>
+</div>
+
+<ol class="org-ol">
+<li>O <b>Front-End</b> realiza uma requisição HTTP para a API via <b>Axios</b>.</li>
+<li>A API recebe a requisição e valida os dados com <b>Pydantic</b>.</li>
+<li>O FastAPI encaminha a requisição para a camada de serviço, onde a lógica de negócios é aplicada.</li>
+<li>Se necessário, os dados são consultados no <b>PostgreSQL</b> ou <b>Redis</b> (cache).</li>
+<li>Caso seja uma operação assíncrona (ex: envio de e-mail), a requisição é enviada para o <b>RabbitMQ</b>.</li>
+<li>A resposta é retornada ao <b>Front-End</b>, com códigos HTTP apropriados.</li>
+<li>Logs da requisição são armazenados no <b>MongoDB</b> para auditoria.</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2025-03-25 Tue 20:01</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+#+TITLE: Front End Completo
+#+DESCRIPTION: Front End da Aplicação
+#+SETUPFILE: theme/theme.setup
+#+OPTIONS: num:nil ^:{}
+#+INCLUDE: "header.org"
+#+EXPORT_FILE_NAME: ../front-end.html
+
+* Visão Geral  
+
+O *Front-End* da aplicação é desenvolvido utilizando *React*, proporcionando uma interface interativa, dinâmica e responsiva. O objetivo principal é garantir uma excelente experiência do usuário (*UX*)
+
+As principais funcionalidades da interface incluem:  
+
+- Dashboard interativo para administração da empresa  
+- Gestão de funcionários e permissões  
+- Integração com calendário corporativo  
+- Sistema de chat em tempo real  
+- Design responsivo e adaptável para dispositivos móveis  
+
+* Estrutura do Projeto  
+
+O *Front-End* deve seguir uma estrutura modular para facilitar a manutenção e escalabilidade.
+
+* Tecnologias Utilizadas  
+
+A stack do *Front-End* foi escolhida para garantir **desempenho, escalabilidade e uma boa experiência para os desenvolvedores**.  
+
+- **Linguagem**:  
+  - JavaScript → Linguagem principal do desenvolvimento.  
+
+- **Framework**:  
+  - React → Biblioteca para construção da interface.  
+
+- **UI/UX**:  
+  - MUI (Material UI) → Biblioteca de componentes estilizados.  
+
+- **Build e Performance**:  
+  - Vite → Ferramenta de *build* rápida e otimizada para desenvolvimento e produção.  
+
+- **Testes**:  
+  - Jest → Framework de testes para garantir a estabilidade do código.  
+  - Testing Library → Ferramenta para testar interações e acessibilidade da interface.  
+
+- **Gerenciamento de Estado**:  
+  - React Context API → Gerencia o estado global da aplicação de forma eficiente.  
+
+- **Roteamento**:  
+  - React Router → Gerencia a navegação entre as páginas da aplicação.  
+
+- **Autenticação e Segurança**:  
+  - JWT (JSON Web Token) → Utilizado para autenticação segura dos usuários.  
+
+- **Integração com API**:  
+  - Axios → Biblioteca para consumo da API do *Back-End*.  
